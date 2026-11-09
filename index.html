@@ -1,0 +1,809 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Todo Gráfico | Tazas personalizadas</title>
+<meta name="description" content="Tazas personalizadas en sublimación. Desde 1 pieza, entrega en 3 días aprox. y pago a la entrega. Pide por WhatsApp.">
+<meta name="theme-color" content="#151515">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Archivo+Black&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --crema:#FFF8F0;
+    --crema-2:#FFEFDF;
+    --papel:#FFFFFF;
+    --terracota:#E5007D;      /* magenta de la marca */
+    --terracota-osc:#B80064;
+    --mostaza:#FFD500;        /* amarillo de la marca */
+    --durazno:#7FD3F2;
+    --cian:#00A3E0;           /* cian de la marca */
+    --cafe:#151515;           /* negro de la marca */
+    --cafe-suave:#57514B;
+    --linea:#EEE2D5;
+    --wa:#25D366;
+    --radio:22px;
+    --sombra:0 10px 30px -12px rgba(20,20,20,.35);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-padding-top:72px}
+  body{
+    font-family:"Nunito",system-ui,sans-serif;
+    background:var(--crema);
+    color:var(--cafe);
+    line-height:1.55;
+    font-size:17px;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{font-family:"Archivo",system-ui,sans-serif;font-weight:900;line-height:1.05;letter-spacing:-.02em}
+  a{color:inherit}
+  img,svg{display:block;max-width:100%}
+  .contenedor{width:100%;max-width:1120px;margin:0 auto;padding:0 20px}
+
+  /* ---------- Barra superior ---------- */
+  .barra{
+    position:sticky;top:0;z-index:40;
+    background:rgba(255,246,236,.92);
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--linea);
+  }
+  .barra .contenedor{display:flex;align-items:center;height:64px}
+  .barra .logo{margin-right:auto}
+  .logo{display:flex;align-items:center;text-decoration:none}
+  .logo svg{height:46px;width:auto}
+  .menu{display:flex;gap:26px;list-style:none;align-items:center}
+  .menu a{text-decoration:none;font-weight:700;color:var(--cafe-suave)}
+  .menu a:hover{color:var(--terracota)}
+  .menu .btn{color:#fff}
+  .hamburguesa{
+    display:none;background:none;border:0;width:44px;height:44px;border-radius:12px;
+    cursor:pointer;color:var(--cafe);
+  }
+  .hamburguesa span{display:block;width:22px;height:2.5px;background:currentColor;margin:4px auto;border-radius:2px;transition:.25s}
+
+  /* ---------- Botones ---------- */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    padding:14px 24px;border-radius:999px;font-weight:800;text-decoration:none;
+    border:0;cursor:pointer;font-family:inherit;font-size:1rem;transition:transform .15s, box-shadow .15s, background .15s;
+  }
+  .btn:active{transform:scale(.97)}
+  .btn-principal{background:var(--terracota);color:#fff;box-shadow:var(--sombra)}
+  .btn-principal:hover{background:var(--terracota-osc)}
+  .btn-wa{background:var(--wa);color:#fff;box-shadow:0 10px 24px -10px rgba(37,211,102,.8)}
+  .btn-wa:hover{background:#1eb957}
+  .btn-borde{background:transparent;color:var(--cafe);border:2px solid var(--cafe)}
+  .btn-borde:hover{background:var(--cafe);color:var(--crema)}
+  .btn-chico{padding:10px 18px;font-size:.95rem}
+
+  /* ---------- Portada ---------- */
+  .portada{
+    position:relative;overflow:hidden;
+    background:
+      radial-gradient(circle at 88% 12%, rgba(255,213,0,.28), transparent 42%),
+      radial-gradient(circle at 8% 92%, rgba(0,163,224,.16), transparent 45%),
+      radial-gradient(circle at 60% 100%, rgba(229,0,125,.10), transparent 40%),
+      var(--crema);
+    padding:56px 0 72px;
+  }
+  .portada .contenedor{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+  .etiqueta{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--papel);border:1px solid var(--linea);
+    padding:7px 14px;border-radius:999px;font-weight:700;font-size:.9rem;color:var(--terracota-osc);
+  }
+  .etiqueta i{width:8px;height:8px;border-radius:50%;background:var(--wa);display:inline-block}
+  .portada h1{font-size:clamp(2.4rem,7vw,4.2rem);margin:18px 0 16px;font-weight:800}
+  .portada h1 em{font-style:normal;color:var(--terracota);position:relative;white-space:nowrap}
+  .portada h1 em::after{
+    content:"";position:absolute;left:-2%;right:-2%;bottom:.06em;height:.28em;
+    background:var(--mostaza);opacity:.45;border-radius:6px;z-index:-1;
+  }
+  .portada p.lead{font-size:1.15rem;color:var(--cafe-suave);max-width:34ch}
+  .acciones{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+  .sellos{display:flex;gap:18px;flex-wrap:wrap;margin-top:28px;font-weight:700;font-size:.95rem;color:var(--cafe-suave)}
+  .sellos span{display:flex;align-items:center;gap:6px}
+  .sellos b{color:var(--terracota)}
+
+  .escena{position:relative;aspect-ratio:1/1;max-width:480px;margin:0 auto;width:100%}
+  .escena .circulo{
+    position:absolute;inset:6%;border-radius:50%;
+    background:conic-gradient(from -30deg,var(--mostaza) 0 33.3%,var(--terracota) 0 66.6%,var(--cian) 0);
+  }
+  .escena .circulo::after{content:"";position:absolute;inset:13%;border-radius:50%;background:var(--crema)}
+  .escena .registro{position:absolute;inset:0;pointer-events:none}
+  .escena .registro::before,.escena .registro::after{content:"";position:absolute;background:var(--cafe)}
+  .escena .registro::before{left:50%;top:0;bottom:0;width:3px;transform:translateX(-50%)}
+  .escena .registro::after{top:50%;left:0;right:0;height:3px;transform:translateY(-50%)}
+  .escena .taza-portada{position:absolute;width:86%;left:7%;top:21%;height:auto;filter:drop-shadow(0 22px 24px rgba(20,20,20,.35))}
+  .escena .precio{
+    position:absolute;right:6%;top:6%;
+    background:var(--cafe);color:var(--crema);border-radius:18px;padding:12px 16px;
+    font-weight:800;text-align:center;line-height:1.1;transform:rotate(5deg);box-shadow:var(--sombra)
+  }
+  .escena .precio small{display:block;font-size:.75rem;font-weight:700;opacity:.8}
+  .escena .precio strong{font-family:"Archivo",sans-serif;font-size:1.7rem}
+  .flotar{animation:flotar 5s ease-in-out infinite}
+  .flotar-2{animation:flotar 6s ease-in-out infinite reverse}
+  @keyframes flotar{0%,100%{translate:0 0}50%{translate:0 -10px}}
+  @media (prefers-reduced-motion:reduce){.flotar,.flotar-2{animation:none}html{scroll-behavior:auto}}
+
+  /* ---------- Secciones ---------- */
+  section{padding:72px 0}
+  .titulo-seccion{text-align:center;max-width:620px;margin:0 auto 40px}
+  .titulo-seccion .mini{color:var(--terracota);font-weight:800;text-transform:uppercase;letter-spacing:.12em;font-size:.8rem}
+  .titulo-seccion h2{font-size:clamp(2rem,5vw,2.8rem);margin:8px 0 10px}
+  .titulo-seccion p{color:var(--cafe-suave)}
+
+  /* Menú de precios */
+  .menu-precios{background:var(--papel);border-top:1px solid var(--linea);border-bottom:1px solid var(--linea)}
+  .tarjetas{display:grid;grid-template-columns:1fr;gap:24px;max-width:680px;margin:0 auto}
+  .tarjeta{
+    background:var(--crema);border:1px solid var(--linea);border-radius:var(--radio);
+    padding:28px;position:relative;overflow:hidden;
+  }
+  .tarjeta-cabeza{display:flex;align-items:center;gap:16px;margin-bottom:18px}
+  .tarjeta-icono{
+    width:64px;height:64px;flex:none;border-radius:18px;display:grid;place-items:center;
+    background:var(--papel);border:1px solid var(--linea);
+  }
+  .tarjeta h3{font-size:1.6rem}
+  .tarjeta .sub{color:var(--cafe-suave);font-size:.95rem}
+  .lista-precios{list-style:none}
+  .lista-precios li{
+    display:flex;align-items:baseline;gap:10px;padding:13px 0;border-bottom:1px dashed var(--linea);
+  }
+  .lista-precios li:last-child{border-bottom:0}
+  .lista-precios .relleno{flex:1;border-bottom:2px dotted var(--durazno);transform:translateY(-4px);min-width:16px}
+  .lista-precios .monto{font-family:"Archivo",sans-serif;font-weight:800;font-size:1.4rem;color:var(--terracota)}
+  .lista-precios .monto small{font-family:"Nunito",sans-serif;font-size:.75rem;color:var(--cafe-suave);font-weight:700;margin-left:2px}
+  .lista-precios li.destacado{background:var(--crema-2);margin:4px -12px 0;padding:13px 12px;border-radius:12px;border-bottom:0}
+  .chip{display:inline-block;background:var(--mostaza);color:var(--cafe);font-size:.72rem;font-weight:800;padding:3px 9px;border-radius:999px;margin-left:6px;vertical-align:middle;text-transform:uppercase;letter-spacing:.04em}
+  .notas{margin-top:16px;display:grid;gap:8px}
+  .nota{display:flex;gap:10px;align-items:flex-start;font-size:.95rem;color:var(--cafe-suave)}
+  .nota::before{content:"";flex:none;width:8px;height:8px;margin-top:8px;border-radius:50%;background:var(--terracota)}
+
+  .extras{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+  .extra{background:var(--crema);border:1px solid var(--linea);border-radius:18px;padding:20px}
+  .extra .monto{font-family:"Archivo",sans-serif;font-weight:800;font-size:1.6rem;color:var(--terracota)}
+  .extra h4{font-size:1.05rem;margin:2px 0 4px}
+  .extra p{font-size:.92rem;color:var(--cafe-suave)}
+
+  /* Temporada */
+  .galeria{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .producto{background:var(--papel);border:1px solid var(--linea);border-radius:var(--radio);overflow:hidden;box-shadow:var(--sombra);display:flex;flex-direction:column}
+  .producto-foto{position:relative;padding:22px 26px 10px}
+  .producto-foto svg,.producto-foto img{display:block;width:100%;height:auto;filter:drop-shadow(0 16px 18px rgba(20,20,20,.28))}
+  .producto-foto img{width:92%;aspect-ratio:610/574;object-fit:contain;margin:14px auto 6px}
+  .foto-navidad{background:radial-gradient(circle at 50% 60%,#E6F6FD,#9FDCF4 75%)}
+  .foto-guadalupe{background:radial-gradient(circle at 50% 60%,#FDE6F2,#F6A9D2 75%)}
+  .chip-foto{position:absolute;top:16px;left:16px;margin:0;background:var(--cafe);color:var(--crema)}
+  .producto-info{padding:22px 24px 24px;display:flex;flex-direction:column;flex:1}
+  .producto-info h3{font-size:1.45rem;margin-bottom:6px}
+  .producto-info p{color:var(--cafe-suave);font-size:.98rem;flex:1}
+  .producto-pie{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px}
+  .desde{color:var(--cafe-suave);font-weight:700}
+  .desde b{font-family:"Archivo",sans-serif;font-size:1.5rem;color:var(--terracota)}
+  .aviso-temporada{text-align:center;color:var(--cafe-suave);font-size:.88rem;margin-top:20px}
+
+  /* Catálogo */
+  .centrado{text-align:center;margin-top:28px}
+  .catalogo{
+    border:0;padding:0;margin:auto;width:min(1080px,100%);max-width:100%;height:min(92vh,900px);max-height:100%;
+    border-radius:26px;background:var(--crema);color:var(--cafe);box-shadow:0 30px 80px -20px rgba(0,0,0,.5);
+    overflow:hidden;
+  }
+  .catalogo[open]{display:flex;flex-direction:column}
+  .catalogo::backdrop{background:rgba(21,21,21,.6);backdrop-filter:blur(3px)}
+  .cat-cabeza{padding:18px 20px 12px;background:var(--papel);border-bottom:1px solid var(--linea)}
+  .cat-fila{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .cat-cabeza h2{font-size:1.6rem}
+  .cat-cerrar{width:44px;height:44px;border-radius:50%;border:0;background:var(--crema-2);color:var(--cafe);font-size:1.5rem;cursor:pointer;flex:none}
+  .cat-cerrar:hover{background:var(--linea)}
+  .filtros{display:flex;gap:8px;margin-top:12px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+  .filtros::-webkit-scrollbar{display:none}
+  .filtro{flex:none;border:2px solid var(--cafe);background:transparent;color:var(--cafe);border-radius:999px;padding:7px 16px;font-family:inherit;font-weight:800;font-size:.92rem;cursor:pointer}
+  .filtro[aria-pressed="true"]{background:var(--cafe);color:#fff}
+  .cat-cuerpo{flex:1;overflow-y:auto;padding:20px;-webkit-overflow-scrolling:touch}
+  .cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+  .cat-item{background:var(--papel);border:1px solid var(--linea);border-radius:20px;overflow:hidden;display:flex;flex-direction:column}
+  .cat-img{aspect-ratio:1/1;display:grid;place-items:center;padding:14px;background:radial-gradient(circle at 50% 55%,#fff,var(--crema-2) 75%)}
+  .cat-img svg,.cat-img img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 10px 12px rgba(20,20,20,.22))}
+  .cat-img img{object-fit:contain}
+  .cat-img svg{width:86%;height:auto;aspect-ratio:1/1}
+  .cat-info{padding:12px 14px 14px;display:flex;flex-direction:column;gap:8px;flex:1}
+  .cat-info h3{font-size:1.05rem}
+  .cat-info .cat-tipo{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--terracota)}
+  .cat-info .btn{margin-top:auto;padding:10px 14px;font-size:.92rem}
+  .cat-pie{padding:12px 20px;border-top:1px solid var(--linea);background:var(--papel);font-size:.88rem;color:var(--cafe-suave);text-align:center}
+  @media (max-width:600px){
+    .catalogo{width:100%;height:100%;border-radius:0}
+    .cat-grid{grid-template-columns:1fr 1fr;gap:10px}
+    .cat-cuerpo{padding:12px}
+    .cat-info{padding:10px}
+    .cat-info h3{font-size:.95rem}
+    .cat-info .btn{padding:9px 10px;font-size:.85rem;gap:6px}
+  }
+
+  /* Cotizador */
+  .cotizador{
+    margin-top:40px;background:var(--cafe);color:var(--crema);border-radius:28px;padding:32px;
+    display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:center;
+  }
+  .cotizador h3{font-size:1.8rem;margin-bottom:6px}
+  .cotizador > div > p{opacity:.8;margin-bottom:20px}
+  .campos{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .campo label{display:block;font-weight:700;font-size:.88rem;margin-bottom:6px;opacity:.9}
+  .contador{display:flex;align-items:center;background:rgba(255,246,236,.08);border:1px solid rgba(255,246,236,.2);border-radius:14px;overflow:hidden}
+  .contador button{width:44px;height:46px;border:0;background:transparent;color:var(--crema);font-size:1.3rem;font-weight:800;cursor:pointer}
+  .contador button:hover{background:rgba(255,246,236,.12)}
+  .contador input{
+    flex:1;min-width:0;width:100%;text-align:center;background:transparent;border:0;color:var(--crema);
+    font-family:inherit;font-weight:800;font-size:1.1rem;-moz-appearance:textfield;appearance:textfield;
+  }
+  .contador input::-webkit-outer-spin-button,.contador input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+  .contador input:focus{outline:none}
+  .contador:focus-within{border-color:var(--cian)}
+  .resumen{background:var(--crema);color:var(--cafe);border-radius:22px;padding:24px}
+  .resumen .fila{display:flex;justify-content:space-between;gap:10px;font-size:.95rem;padding:6px 0;color:var(--cafe-suave)}
+  .resumen .fila b{color:var(--cafe)}
+  .resumen .total{display:flex;justify-content:space-between;align-items:baseline;border-top:2px dashed var(--linea);margin-top:10px;padding-top:14px}
+  .resumen .total span{font-weight:800}
+  .resumen .total strong{font-family:"Archivo",sans-serif;font-size:2.1rem;color:var(--terracota)}
+  .resumen .tip{font-size:.85rem;color:var(--terracota-osc);font-weight:700;margin-top:8px;min-height:1.2em}
+  .resumen .btn{width:100%;margin-top:14px}
+  .resumen .aviso{font-size:.78rem;color:var(--cafe-suave);margin-top:10px;text-align:center}
+  .vacio{color:var(--cafe-suave);font-size:.95rem;text-align:center;padding:10px 0}
+
+  /* Cómo funciona */
+  .pasos{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;counter-reset:paso}
+  .paso{background:var(--papel);border:1px solid var(--linea);border-radius:var(--radio);padding:28px;position:relative}
+  .paso::before{
+    counter-increment:paso;content:counter(paso);
+    width:46px;height:46px;border-radius:14px;display:grid;place-items:center;
+    background:var(--mostaza);color:var(--cafe);font-family:"Archivo",sans-serif;font-weight:800;font-size:1.3rem;margin-bottom:14px;
+  }
+  .paso:nth-child(2)::before{background:var(--cian);color:#fff}
+  .paso:nth-child(3)::before{background:var(--terracota);color:#fff}
+  .paso h3{font-size:1.3rem;margin-bottom:6px}
+  .paso p{color:var(--cafe-suave)}
+
+  /* Condiciones */
+  .condiciones{background:var(--crema-2)}
+  .ventajas{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .ventaja{background:var(--papel);border-radius:20px;padding:22px;text-align:center;border:1px solid var(--linea)}
+  .ventaja .ico{font-size:2rem;line-height:1;margin-bottom:10px}
+  .ventaja h4{font-family:"Archivo",sans-serif;font-size:1.2rem;margin-bottom:4px}
+  .ventaja p{font-size:.92rem;color:var(--cafe-suave)}
+
+  /* Contacto */
+  .contacto-caja{
+    background:var(--cafe);
+    border-top:10px solid transparent;
+    background-image:linear-gradient(var(--cafe),var(--cafe)),linear-gradient(90deg,var(--cian) 0 33.3%,var(--terracota) 0 66.6%,var(--mostaza) 0);
+    background-origin:border-box;background-clip:padding-box,border-box;
+    color:#fff;border-radius:30px;padding:48px 32px;text-align:center;position:relative;overflow:hidden;
+  }
+  .contacto-caja::before,.contacto-caja::after{background:rgba(229,0,125,.2);
+    content:"";position:absolute;border-radius:50%;background:rgba(0,163,224,.18);
+  }
+  .contacto-caja::before{width:260px;height:260px;left:-80px;top:-100px}
+  .contacto-caja::after{background:rgba(229,0,125,.2);width:200px;height:200px;right:-60px;bottom:-80px}
+  .contacto-caja h2{font-size:clamp(2rem,5vw,2.8rem);margin-bottom:10px;position:relative}
+  .contacto-caja p{opacity:.95;max-width:40ch;margin:0 auto 24px;position:relative}
+  .contacto-caja .telefono{color:var(--mostaza);font-family:"Archivo",sans-serif;font-size:clamp(1.6rem,5vw,2.2rem);font-weight:800;display:block;margin-bottom:22px;text-decoration:none;position:relative}
+  .contacto-caja .btn{position:relative}
+  .contacto-caja .btn-wa{background:var(--wa);color:#fff}
+  .contacto-caja .btn-wa:hover{background:#1eb957}
+
+  footer{padding:28px 0 100px;}
+  .logo-pie{justify-content:center;margin-bottom:10px}
+  .logo-pie svg{height:60px}
+  footer{text-align:center;color:var(--cafe-suave);font-size:.9rem}
+
+  /* WhatsApp flotante */
+  .wa-flotante{
+    position:fixed;right:18px;bottom:18px;z-index:50;
+    width:62px;height:62px;border-radius:50%;background:var(--wa);color:#fff;
+    display:grid;place-items:center;box-shadow:0 12px 28px -8px rgba(0,0,0,.4);
+    text-decoration:none;transition:transform .2s;
+  }
+  .wa-flotante:hover{transform:scale(1.07)}
+  .wa-flotante::before{
+    content:"";position:absolute;inset:0;border-radius:50%;background:var(--wa);z-index:-1;
+    animation:pulso 2.2s ease-out infinite;
+  }
+  @keyframes pulso{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.6);opacity:0}}
+  @media (prefers-reduced-motion:reduce){.wa-flotante::before{animation:none}}
+  .wa-flotante .globo{
+    position:absolute;right:74px;white-space:nowrap;background:var(--papel);color:var(--cafe);
+    padding:9px 14px;border-radius:14px;font-weight:800;font-size:.9rem;box-shadow:var(--sombra);
+  }
+
+  /* ---------- Celular ---------- */
+  @media (max-width:860px){
+    .hamburguesa{display:block}
+    .menu{
+      position:fixed;top:64px;left:0;right:0;flex-direction:column;gap:0;
+      background:var(--crema);border-bottom:1px solid var(--linea);
+      padding:8px 20px 20px;box-shadow:0 20px 30px -20px rgba(20,20,20,.35);
+      transform:translateY(-8px);opacity:0;pointer-events:none;transition:.2s;
+    }
+    .menu li{width:100%}
+    .menu a{display:block;padding:14px 4px;border-bottom:1px solid var(--linea);font-size:1.05rem}
+    .menu li:last-child a{border-bottom:0;margin-top:12px;text-align:center;padding:14px}
+    .barra.abierto .menu{transform:none;opacity:1;pointer-events:auto}
+    .barra.abierto .hamburguesa span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+    .barra.abierto .hamburguesa span:nth-child(2){opacity:0}
+    .barra.abierto .hamburguesa span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+    .portada{padding:28px 0 52px}
+    .portada .contenedor{grid-template-columns:1fr;gap:18px}
+    .escena{max-width:340px;order:-1}
+    .portada .texto{text-align:center}
+    .portada p.lead{margin:0 auto}
+    .acciones{justify-content:center}
+    .acciones .btn{flex:1 1 220px}
+    .sellos{justify-content:center}
+
+    section{padding:56px 0}
+    .tarjetas,.cotizador,.galeria{grid-template-columns:1fr}
+    .extras{grid-template-columns:1fr}
+    .pasos{grid-template-columns:1fr}
+    .ventajas{grid-template-columns:1fr 1fr}
+    .cotizador{padding:24px 20px}
+    .wa-flotante .globo{display:none}
+  }
+  @media (max-width:420px){
+    body{font-size:16px}
+    .contenedor{padding:0 16px}
+    .tarjeta{padding:22px 18px}
+    .campos{grid-template-columns:1fr 1fr;gap:10px}
+    .contador button{width:38px}
+    .ventajas{grid-template-columns:1fr 1fr;gap:10px}
+    .ventaja{padding:16px 12px}
+    .contacto-caja{padding:40px 20px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== BARRA / NAVEGACIÓN ========== -->
+<header class="barra" id="barra">
+  <div class="contenedor">
+    <a href="#inicio" class="logo" aria-label="Todo Gráfico, inicio">
+      <svg viewBox="0 0 196 86" role="img" aria-label="Todo Gráfico"><use href="#logo-tg"/></svg>
+    </a>
+    <button class="hamburguesa" id="hamburguesa" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav>
+      <ul class="menu" id="menu">
+        <li><a href="#catalogo" class="abrir-catalogo">Catálogo</a></li>
+        <li><a href="#temporada">Temporada</a></li>
+        <li><a href="#precios">Menú y precios</a></li>
+        <li><a href="#cotiza">Cotiza</a></li>
+        <li><a href="#como">Cómo pedir</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li><a class="btn btn-principal btn-chico wa-link" href="#" data-msg="¡Hola Todo Gráfico! Quiero información sobre tazas personalizadas.">Pedir ahora</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+<!-- ========== PORTADA ========== -->
+<section class="portada" id="inicio">
+  <div class="contenedor">
+    <div class="texto">
+      <span class="etiqueta"><i></i> Pedidos por WhatsApp · desde 1 pieza</span>
+      <h1>Tazas <em>personalizadas</em></h1>
+      <p class="lead">Tu foto, tu frase o tu logo impreso en sublimación, con colores que duran. Ideal para regalos, eventos y negocios.</p>
+      <div class="acciones">
+        <a class="btn btn-wa wa-link" href="#" data-msg="¡Hola Todo Gráfico! Quiero cotizar tazas personalizadas.">
+          <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><use href="#ico-wa"/></svg>
+          Cotizar por WhatsApp
+        </a>
+        <a class="btn btn-borde abrir-catalogo" href="#catalogo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg> Ver catálogo</a>
+      </div>
+      <div class="sellos">
+        <span>⏱ Entrega <b>3 días</b> aprox.</span>
+        <span>💵 Pagas <b>a la entrega</b></span>
+        <span>🎨 Diseño de catálogo <b>gratis</b></span>
+      </div>
+    </div>
+
+    <div class="escena" aria-hidden="true">
+      <div class="circulo"></div><div class="registro"></div>
+      <img class="taza-portada flotar" src="img/taza-virgen-guadalupe.webp" width="610" height="574" alt="Taza personalizada con la Oración a la Virgen de Guadalupe" fetchpriority="high">
+      <div class="precio"><small>Tazas desde</small><strong>$26</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TEMPORADA ========== -->
+<section class="temporada" id="temporada">
+  <div class="contenedor">
+    <div class="titulo-seccion">
+      <span class="mini">Diseños de temporada</span>
+      <h2>Tazas para regalar esta temporada</h2>
+      <p>Diseños navideños y de la Virgen de Guadalupe, listos para personalizar con el nombre que quieras.</p>
+    </div>
+    <div class="galeria">
+      <!-- Taza navideña -->
+      <article class="producto">
+        <div class="producto-foto foto-navidad">
+          <span class="chip chip-foto">Navidad</span>
+          <img src="img/taza-navidad.webp" width="611" height="573" alt="Taza blanca con diseño navideño: Feliz Navidad, muñeco de nieve, regalo, farol y esfera" loading="lazy">
+        </div>
+        <div class="producto-info">
+          <h3>Taza navideña</h3>
+          <p>Muñeco de nieve, regalos y “Feliz Navidad”. Le podemos agregar el nombre de quien la recibe. Ideal para el intercambio.</p>
+          <div class="producto-pie">
+            <span class="desde">desde <b>$26</b></span>
+            <a class="btn btn-wa btn-chico wa-link" href="#" data-msg="¡Hola Todo Gráfico! Quiero la taza NAVIDEÑA personalizada.">
+              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><use href="#ico-wa"/></svg> La quiero
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Taza Virgen de Guadalupe -->
+      <article class="producto">
+        <div class="producto-foto foto-guadalupe">
+          <span class="chip chip-foto">12 de diciembre</span>
+          <img src="img/taza-virgen-guadalupe.webp" width="610" height="574" alt="Taza blanca con la Oración a la Virgen de Guadalupe, imagen de la Virgen, lirios, veladora y el nombre Familia Vázquez Santiago 2026" loading="lazy">
+        </div>
+        <div class="producto-info">
+          <h3>Taza Virgen de Guadalupe</h3>
+          <p>Con la Oración a la Virgen de Guadalupe y el nombre de tu familia y el año. Para el 12 de diciembre o para regalar.</p>
+          <div class="producto-pie">
+            <span class="desde">desde <b>$26</b></span>
+            <a class="btn btn-wa btn-chico wa-link" href="#" data-msg="¡Hola Todo Gráfico! Quiero la taza de la VIRGEN DE GUADALUPE personalizada.">
+              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><use href="#ico-wa"/></svg> La quiero
+            </a>
+          </div>
+        </div>
+      </article>
+    </div>
+    <div class="centrado"><a class="btn btn-principal abrir-catalogo" href="#catalogo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg> Ver catálogo completo</a></div>
+    <p class="aviso-temporada">Imágenes ilustrativas. Pide tu diseño y te mandamos la vista previa por WhatsApp antes de imprimir.</p>
+  </div>
+</section>
+
+<!-- ========== MENÚ / PRECIOS ========== -->
+<section class="menu-precios" id="precios">
+  <div class="contenedor">
+    <div class="titulo-seccion">
+      <span class="mini">Nuestro menú</span>
+      <h2>Precios claros, sin sorpresas</h2>
+      <p>Todo impreso en sublimación. Precios en pesos mexicanos, por pieza.</p>
+    </div>
+
+    <div class="tarjetas">
+      <!-- Tazas -->
+      <article class="tarjeta">
+        <div class="tarjeta-cabeza">
+          <div class="tarjeta-icono">
+            <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#E5007D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h12v9a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"/><path d="M16 9h1.5a2.5 2.5 0 0 1 0 5H16"/><path d="M8 2v1.5M12 2v1.5"/></svg>
+          </div>
+          <div>
+            <h3>Tazas</h3>
+            <div class="sub">Cerámica 11 oz · personalizado incluido</div>
+          </div>
+        </div>
+        <ul class="lista-precios">
+          <li><span>1 a 12 piezas</span><span class="relleno"></span><span class="monto">$40<small>c/u</small></span></li>
+          <li><span>13 a 24 piezas</span><span class="relleno"></span><span class="monto">$35<small>c/u</small></span></li>
+          <li><span>25 a 35 piezas</span><span class="relleno"></span><span class="monto">$30<small>c/u</small></span></li>
+          <li class="destacado"><span>36 o más <span class="chip">Mejor precio</span></span><span class="relleno"></span><span class="monto">$26<small>c/u</small></span></li>
+        </ul>
+        <div class="notas">
+          <div class="nota">El precio se toma por la cantidad total de tazas del pedido.</div>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="extras">
+      <div class="extra">
+        <div class="monto">Gratis</div>
+        <h4>Diseño de catálogo</h4>
+        <p>Elige uno de nuestros diseños y no pagas nada extra.</p>
+      </div>
+      <div class="extra">
+        <div class="monto">~$50</div>
+        <h4>Diseño especial</h4>
+        <p>Un diseño diferente se cobra una sola vez, no por pieza. Puede variar según la dificultad.</p>
+      </div>
+      <div class="extra">
+        <div class="monto">3 días</div>
+        <h4>Tiempo de entrega</h4>
+        <p>Aproximadamente. Pago en efectivo al recibir tu pedido, sin anticipo.</p>
+      </div>
+    </div>
+
+    <!-- ========== COTIZADOR ========== -->
+    <div class="cotizador" id="cotiza">
+      <div>
+        <h3>Arma tu pedido</h3>
+        <p>Calcula tu total al momento y mándanos el pedido por WhatsApp.</p>
+        <div class="campos">
+          <div class="campo">
+            <label for="c-tazas">Tazas</label>
+            <div class="contador"><button type="button" data-paso="-1" aria-label="Menos tazas">−</button><input id="c-tazas" type="number" inputmode="numeric" min="0" value="0"><button type="button" data-paso="1" aria-label="Más tazas">+</button></div>
+          </div>
+          <div class="campo">
+            <label for="c-disenos">Diseños especiales</label>
+            <div class="contador"><button type="button" data-paso="-1" aria-label="Menos diseños especiales">−</button><input id="c-disenos" type="number" inputmode="numeric" min="0" value="0"><button type="button" data-paso="1" aria-label="Más diseños especiales">+</button></div>
+          </div>
+        </div>
+      </div>
+      <div class="resumen" aria-live="polite">
+        <div id="r-lineas"><div class="vacio">Agrega tazas para ver tu total ☕</div></div>
+        <div class="total"><span>Total aprox.</span><strong id="r-total">$0</strong></div>
+        <div class="tip" id="r-tip"></div>
+        <a class="btn btn-wa" id="r-enviar" href="#">
+          <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><use href="#ico-wa"/></svg>
+          Enviar pedido
+        </a>
+        <div class="aviso">El precio final se confirma por WhatsApp.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CÓMO PEDIR ========== -->
+<section id="como">
+  <div class="contenedor">
+    <div class="titulo-seccion">
+      <span class="mini">Así de fácil</span>
+      <h2>¿Cómo hago mi pedido?</h2>
+    </div>
+    <div class="pasos">
+      <div class="paso">
+        <h3>Escríbenos</h3>
+        <p>Mándanos un WhatsApp con cuántas tazas quieres.</p>
+      </div>
+      <div class="paso">
+        <h3>Elige tu diseño</h3>
+        <p>Escoge uno de nuestro catálogo o mándanos tu foto, frase o logo.</p>
+      </div>
+      <div class="paso">
+        <h3>Recibe y paga</h3>
+        <p>En unos 3 días está listo. Pagas en efectivo al recibirlo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CONDICIONES ========== -->
+<section class="condiciones">
+  <div class="contenedor">
+    <div class="ventajas">
+      <div class="ventaja"><div class="ico">🔥</div><h4>Sublimación</h4><p>Colores vivos que no se cuartean.</p></div>
+      <div class="ventaja"><div class="ico">📦</div><h4>Desde 1 pieza</h4><p>Un regalo o un pedido grande.</p></div>
+      <div class="ventaja"><div class="ico">💵</div><h4>Sin anticipo</h4><p>Pago en efectivo a la entrega.</p></div>
+      <div class="ventaja"><div class="ico">⏱</div><h4>3 días</h4><p>Tiempo de entrega aproximado.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CONTACTO ========== -->
+<section id="contacto">
+  <div class="contenedor">
+    <div class="contacto-caja">
+      <h2>¿Lista tu idea?</h2>
+      <p>Escríbenos y te mandamos tu cotización en minutos.</p>
+      <a class="telefono" href="tel:+529981691976">998 169 1976</a>
+      <a class="btn btn-wa wa-link" href="#" data-msg="¡Hola Todo Gráfico! Me gustaría hacer un pedido.">
+        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><use href="#ico-wa"/></svg>
+        Escribir por WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- Dibujos que usa el catálogo -->
+<div hidden><svg id="dibujo-mama" viewBox="0 0 160 160">
+        <path d="M118 52 C150 52 150 104 118 104" fill="none" stroke="#FFFDF9" stroke-width="13" stroke-linecap="round"/>
+        <path d="M118 52 C150 52 150 104 118 104" fill="none" stroke="#D9D2CB" stroke-width="2"/>
+        <path d="M22 34 L124 34 L118 136 C117 144 110 148 102 148 L44 148 C36 148 29 144 28 136 Z" fill="#FFFDF9" stroke="#D9D2CB" stroke-width="2.5"/>
+        <ellipse cx="73" cy="34" rx="51" ry="9" fill="#EFEAE5" stroke="#D9D2CB" stroke-width="2.5"/>
+        <path d="M48 80 C48 68 64 66 72 78 C80 66 96 68 96 80 C96 96 72 108 72 108 C72 108 48 96 48 80 Z" fill="#E5007D"/>
+        <text x="72" y="130" text-anchor="middle" font-family="Archivo, Arial, sans-serif" font-weight="800" font-size="12" fill="#151515">MAMÁ</text>
+      </svg></div>
+
+<!-- ========== CATÁLOGO (ventana) ========== -->
+<dialog class="catalogo" id="catalogo" aria-labelledby="cat-titulo">
+  <div class="cat-cabeza">
+    <div class="cat-fila">
+      <h2 id="cat-titulo">Catálogo de diseños</h2>
+      <button class="cat-cerrar" type="button" aria-label="Cerrar catálogo">×</button>
+    </div>
+    <div class="filtros" role="group" aria-label="Filtrar catálogo">
+      <button class="filtro" type="button" data-filtro="todos" aria-pressed="true">Todos</button>
+      <button class="filtro" type="button" data-filtro="tazas" aria-pressed="false">Tazas</button>
+      <button class="filtro" type="button" data-filtro="temporada" aria-pressed="false">Temporada</button>
+    </div>
+  </div>
+  <div class="cat-cuerpo"><div class="cat-grid" id="cat-grid"></div></div>
+  <div class="cat-pie">¿No ves lo que buscas? Mándanos tu idea por WhatsApp y la diseñamos.</div>
+</dialog>
+
+<footer>
+  <div class="contenedor"><a href="#inicio" class="logo logo-pie" aria-label="Todo Gráfico, volver arriba"><svg viewBox="0 0 196 86" role="img" aria-label="Todo Gráfico"><use href="#logo-tg"/></svg></a>© <span id="anio"></span> Todo Gráfico · Tazas personalizadas</div>
+</footer>
+
+<!-- Botón flotante de WhatsApp -->
+<a class="wa-flotante wa-link" href="#" data-msg="¡Hola Todo Gráfico! Quiero información sobre tazas personalizadas." aria-label="Escríbenos por WhatsApp">
+  <span class="globo">¿Cotizamos? 👋</span>
+  <svg width="32" height="32" viewBox="0 0 24 24" aria-hidden="true"><use href="#ico-wa"/></svg>
+</a>
+
+<!-- Logo Todo Gráfico -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="logo-tg" viewBox="0 0 196 86">
+    <text x="0" y="52" font-family="'Archivo Black', 'Arial Black', sans-serif" font-size="58" letter-spacing="-3" fill="#151515">TOD</text>
+    <g transform="translate(146 30)">
+      <circle r="17" fill="none" stroke="#FFE600" stroke-width="12" stroke-dasharray="35.6 71.2" transform="rotate(150)"/>
+      <circle r="17" fill="none" stroke="#E5007D" stroke-width="12" stroke-dasharray="35.6 71.2" transform="rotate(270)"/>
+      <circle r="17" fill="none" stroke="#00A3E0" stroke-width="12" stroke-dasharray="35.6 71.2" transform="rotate(30)"/>
+    </g>
+    <rect x="0" y="58" width="138" height="27" fill="#151515"/>
+    <text x="7" y="80" font-family="'Archivo Black', 'Arial Black', sans-serif" font-size="22" letter-spacing=".5" fill="#FFFFFF">GRÁFICO</text>
+    <rect x="141" y="58" width="27" height="27" fill="#151515"/>
+    <path d="M141 85 V70 Q150 70 156 85 Z" fill="#FFFFFF"/>
+    <path d="M141 70 Q150 70 156 85 Q149 77 141 78 Z" fill="#BDBDBD"/>
+    <path d="M146 0 V64 M116 30 H194" stroke="#151515" stroke-width="2.6"/>
+  </symbol>
+</svg>
+
+<!-- Icono de WhatsApp -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="ico-wa" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M12 2.2A9.8 9.8 0 0 0 3.6 17l-1.4 4.8 4.9-1.3A9.8 9.8 0 1 0 12 2.2Zm0 17.8a8 8 0 0 1-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 1 1 12 20Z"/>
+    <path fill="currentColor" d="M16.4 14.1c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1l-.8 1c-.1.2-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 0 0-.7.3 2.8 2.8 0 0 0-.9 2.1 5 5 0 0 0 1 2.6 11.2 11.2 0 0 0 4.3 3.8c1.6.7 2.2.7 3 .6a2.6 2.6 0 0 0 1.7-1.2 2.1 2.1 0 0 0 .1-1.2c0-.1-.2-.2-.5-.3Z"/>
+  </symbol>
+</svg>
+
+<script>
+  // ===== CATÁLOGO =====
+  // Para agregar tus fotos: guárdalas en una carpeta "img" junto a este archivo
+  // y agrega una línea así:
+  //   { titulo: "Taza Spiderman", tipo: ["tazas"], foto: "img/taza-spiderman.jpg" },
+  // tipo puede ser "tazas" y/o "temporada".
+  // "dibujo" reutiliza las ilustraciones que ya están en la página.
+  const CATALOGO = [
+    { titulo: "Taza navideña",            tipo: ["tazas", "temporada"], foto: "img/taza-navidad.webp" },
+    { titulo: "Taza Virgen de Guadalupe", tipo: ["tazas", "temporada"], foto: "img/taza-virgen-guadalupe.webp" },
+    { titulo: "Taza para mamá",           tipo: ["tazas"],              dibujo: "#dibujo-mama" },
+  ];
+</script>
+<script>
+  // ===== Configuración =====
+  const WHATSAPP = "529981691976"; // 52 + número a 10 dígitos
+  const waURL = (msg) => "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(msg);
+
+  document.querySelectorAll(".wa-link").forEach(a => {
+    a.href = waURL(a.dataset.msg || "¡Hola Todo Gráfico!");
+    a.target = "_blank"; a.rel = "noopener";
+  });
+  document.getElementById("anio").textContent = new Date().getFullYear();
+
+  // ===== Catálogo: armar y abrir =====
+  const dlg = document.getElementById("catalogo");
+  const grid = document.getElementById("cat-grid");
+  const NOMBRE_TIPO = { tazas: "Taza", temporada: "Temporada" };
+  CATALOGO.forEach(item => {
+    const art = document.createElement("article");
+    art.className = "cat-item";
+    art.dataset.tipo = item.tipo.join(" ");
+    const caja = document.createElement("div");
+    caja.className = "cat-img";
+    if (item.foto) {
+      const img = document.createElement("img");
+      img.src = item.foto; img.alt = item.titulo; img.loading = "lazy";
+      caja.appendChild(img);
+    } else {
+      const orig = document.querySelector(item.dibujo);
+      if (orig) {
+        const copia = orig.cloneNode(true);
+        copia.removeAttribute("class"); copia.removeAttribute("id"); copia.setAttribute("aria-hidden", "true");
+        caja.appendChild(copia);
+      }
+    }
+    const info = document.createElement("div");
+    info.className = "cat-info";
+    info.innerHTML = `<span class="cat-tipo">${item.tipo.map(t => NOMBRE_TIPO[t]).join(" · ")}</span><h3></h3>
+      <a class="btn btn-wa" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><use href="#ico-wa"/></svg> Lo quiero</a>`;
+    info.querySelector("h3").textContent = item.titulo;
+    info.querySelector("a").href = waURL(`¡Hola Todo Gráfico! Me interesa este diseño del catálogo: ${item.titulo}.`);
+    art.append(caja, info);
+    grid.appendChild(art);
+  });
+
+  document.querySelectorAll(".abrir-catalogo").forEach(b => b.addEventListener("click", e => {
+    e.preventDefault();
+    barra.classList.remove("abierto");
+    if (typeof dlg.showModal === "function") dlg.showModal(); else dlg.setAttribute("open", "");
+    document.body.style.overflow = "hidden";
+  }));
+  const cerrarCat = () => dlg.close ? dlg.close() : dlg.removeAttribute("open");
+  dlg.querySelector(".cat-cerrar").addEventListener("click", cerrarCat);
+  dlg.addEventListener("click", e => { if (e.target === dlg) cerrarCat(); });
+  dlg.addEventListener("close", () => { document.body.style.overflow = ""; });
+
+  dlg.querySelectorAll(".filtro").forEach(f => f.addEventListener("click", () => {
+    dlg.querySelectorAll(".filtro").forEach(x => x.setAttribute("aria-pressed", x === f));
+    const tipo = f.dataset.filtro;
+    grid.querySelectorAll(".cat-item").forEach(it => {
+      it.hidden = tipo !== "todos" && !it.dataset.tipo.split(" ").includes(tipo);
+    });
+  }));
+
+  // ===== Menú en celular =====
+  const barra = document.getElementById("barra");
+  const ham = document.getElementById("hamburguesa");
+  ham.addEventListener("click", () => {
+    const abierto = barra.classList.toggle("abierto");
+    ham.setAttribute("aria-expanded", abierto);
+    ham.setAttribute("aria-label", abierto ? "Cerrar menú" : "Abrir menú");
+  });
+  document.querySelectorAll("#menu a").forEach(a => a.addEventListener("click", () => {
+    barra.classList.remove("abierto"); ham.setAttribute("aria-expanded", false);
+  }));
+
+  // ===== Cotizador (misma lista de precios del menú) =====
+  const precioTaza = n => n <= 12 ? 40 : n <= 24 ? 35 : n <= 35 ? 30 : 26;
+  const $ = id => document.getElementById(id);
+  const val = id => Math.max(0, parseInt($(id).value, 10) || 0);
+  const dinero = n => "$" + n.toLocaleString("es-MX");
+
+  document.querySelectorAll(".contador button").forEach(b => b.addEventListener("click", () => {
+    const input = b.parentElement.querySelector("input");
+    input.value = Math.max(0, (parseInt(input.value, 10) || 0) + Number(b.dataset.paso));
+    calcular();
+  }));
+  document.querySelectorAll(".contador input").forEach(i => i.addEventListener("input", calcular));
+
+  function calcular() {
+    const lineas = [];
+    const tazas = val("c-tazas");
+    if (tazas) lineas.push(["Taza 11 oz", tazas, precioTaza(tazas)]);
+
+    const disenos = val("c-disenos");
+    if (disenos) lineas.push(["Diseño especial", disenos, 50]);
+
+    const total = lineas.reduce((s, [, n, p]) => s + n * p, 0);
+    $("r-lineas").innerHTML = lineas.length
+      ? lineas.map(([c, n, p]) => `<div class="fila"><span>${c} × ${n}</span><b>${dinero(n * p)}</b></div>`).join("")
+      : '<div class="vacio">Agrega tazas para ver tu total ☕</div>';
+    $("r-total").textContent = dinero(total);
+
+    let tip = "";
+    if (tazas && tazas < 36) {
+      const sig = tazas <= 12 ? 13 : tazas <= 24 ? 25 : 36;
+      tip = `Con ${sig} tazas o más, bajan a ${dinero(precioTaza(sig))} c/u.`;
+    } else if (tazas >= 36) {
+      tip = `¡Ya tienes el mejor precio: $26 por taza!`;
+    }
+    $("r-tip").textContent = tip;
+
+    let msg = "¡Hola Todo Gráfico! Quiero hacer este pedido:\n";
+    if (lineas.length) {
+      msg += lineas.map(([c, n, p]) => `• ${c}: ${n} × ${dinero(p)} = ${dinero(n * p)}`).join("\n");
+      msg += `\n\nTotal aprox.: ${dinero(total)} MXN`;
+    } else {
+      msg = "¡Hola Todo Gráfico! Quiero cotizar tazas personalizadas.";
+    }
+    $("r-enviar").href = waURL(msg);
+    $("r-enviar").target = "_blank"; $("r-enviar").rel = "noopener";
+  }
+  calcular();
+</script>
+</body>
+</html>
