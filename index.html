@@ -172,12 +172,14 @@
   .extra p{font-size:.92rem;color:var(--cafe-suave)}
 
   /* Temporada */
-  .galeria{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .galeria{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
   .producto{background:var(--papel);border:1px solid var(--linea);border-radius:var(--radio);overflow:hidden;box-shadow:var(--sombra);display:flex;flex-direction:column}
   .producto-foto{position:relative;padding:22px 26px 10px}
   .producto-foto svg,.producto-foto img{display:block;width:100%;height:auto;filter:drop-shadow(0 16px 18px rgba(20,20,20,.28))}
   .producto-foto img{width:92%;aspect-ratio:610/574;object-fit:contain;margin:14px auto 6px}
   .foto-navidad{background:radial-gradient(circle at 50% 60%,#E6F6FD,#9FDCF4 75%)}
+  .foto-proximamente{background:radial-gradient(circle at 50% 60%,#FFF8D6,#FFE27A 75%)}
+  .producto-foto svg{width:92%;aspect-ratio:610/574;margin:14px auto 6px}
   .foto-guadalupe{background:radial-gradient(circle at 50% 60%,#FDE6F2,#F6A9D2 75%)}
   .chip-foto{position:absolute;top:16px;left:16px;margin:0;background:var(--cafe);color:var(--crema)}
   .producto-info{padding:22px 24px 24px;display:flex;flex-direction:column;flex:1}
@@ -196,6 +198,7 @@
   @media (max-width:420px){.disenos-gua{padding:16px}}
   .aviso-temporada{text-align:center;color:var(--cafe-suave);font-size:.88rem;margin-top:20px}
 
+  @media (max-width:1100px) and (min-width:861px){.galeria{grid-template-columns:1fr 1fr}}
   /* Catálogo */
   .centrado{text-align:center;margin-top:28px}
   .catalogo{
@@ -480,18 +483,36 @@
           </div>
         </div>
       </article>
-    </div>
-    <div class="disenos-gua">
-      <span class="chip chip-num">12 diseños</span>
-      <h3>Tazas de la Virgen de Guadalupe</h3>
-      <p>Elige tu diseño por número, del 1 al 12. Le ponemos el nombre de tu familia y el año.</p>
-      <a class="disenos-img" href="img/disenos-virgen-guadalupe.webp" target="_blank" rel="noopener" aria-label="Ver los 12 diseños en grande">
-        <img src="img/disenos-virgen-guadalupe.webp" width="1587" height="991" alt="12 diseños de tazas de la Virgen de Guadalupe numerados del 1 al 12, con oraciones, nombre de la familia y el año 2026" loading="lazy">
-      </a>
-      <small>Toca la imagen para verla en grande.</small>
-      <a class="btn btn-wa wa-link" href="#" data-msg="¡Hola Todo Gráfico! Quiero la taza de la Virgen de Guadalupe, diseño número: ">
-        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><use href="#ico-wa"/></svg> Pedir mi diseño por número
-      </a>
+      <!-- Próximamente -->
+      <article class="producto">
+        <div class="producto-foto foto-proximamente">
+          <span class="chip chip-foto">Próximamente</span>
+          <svg viewBox="0 0 160 160" role="img" aria-label="Taza con dibujo navideño de un regalo y acebo, con el texto Próximamente">
+        <path d="M118 52 C150 52 150 104 118 104" fill="none" stroke="#FFFDF9" stroke-width="13" stroke-linecap="round"/>
+        <path d="M118 52 C150 52 150 104 118 104" fill="none" stroke="#D9D2CB" stroke-width="2"/>
+        <path d="M22 34 L124 34 L118 136 C117 144 110 148 102 148 L44 148 C36 148 29 144 28 136 Z" fill="#FFFDF9" stroke="#D9D2CB" stroke-width="2.5"/>
+        <ellipse cx="73" cy="34" rx="51" ry="9" fill="#EFEAE5" stroke="#D9D2CB" stroke-width="2.5"/>
+        <g fill="#9FDCF4"><circle cx="38" cy="56" r="2.2"/><circle cx="106" cy="54" r="2.2"/><circle cx="42" cy="96" r="1.8"/><circle cx="108" cy="92" r="1.8"/><circle cx="54" cy="50" r="1.4"/><circle cx="96" cy="70" r="1.4"/></g>
+        <rect x="52" y="78" width="42" height="32" rx="3" fill="#C8102E"/>
+        <rect x="70" y="78" width="6" height="32" fill="#FFD500"/>
+        <rect x="52" y="90" width="42" height="6" fill="#FFD500"/>
+        <path d="M73 78 C60 64 54 76 73 78 C92 76 86 64 73 78 Z" fill="#FFD500" stroke="#E0A800" stroke-width="1"/>
+        <path d="M58 62 q8 -10 15 0 q-8 6 -15 0Z M88 62 q-8 -10 -15 0 q8 6 15 0Z" fill="#1F6B3A"/>
+        <g fill="#C8102E"><circle cx="70" cy="60" r="3"/><circle cx="76" cy="60" r="3"/><circle cx="73" cy="55" r="3"/></g>
+        <text x="73" y="128" text-anchor="middle" font-family="Archivo, Arial, sans-serif" font-weight="900" font-size="9" fill="#E5007D">PRÓXIMAMENTE</text>
+      </svg>
+        </div>
+        <div class="producto-info">
+          <h3>Próximamente</h3>
+          <p>Regala algo especial esta temporada. Muy pronto tendremos nuevos diseños navideños.</p>
+          <div class="producto-pie">
+            <span class="desde">desde <b>$26</b></span>
+            <a class="btn btn-wa btn-chico wa-link" href="#" data-msg="¡Hola Todo Gráfico! Avísenme cuando tengan los nuevos diseños navideños.">
+              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><use href="#ico-wa"/></svg> Avísame
+            </a>
+          </div>
+        </div>
+      </article>
     </div>
     <div class="centrado"><a class="btn btn-principal abrir-catalogo" href="#catalogo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg> Ver catálogo completo</a></div>
     <p class="aviso-temporada">Imágenes ilustrativas. Pide tu diseño y te mandamos la vista previa por WhatsApp antes de imprimir.</p>
@@ -636,22 +657,6 @@
 </section>
 </main>
 
-<!-- Dibujos que usa el catálogo -->
-<div hidden><svg id="dibujo-proximamente" viewBox="0 0 160 160">
-        <path d="M118 52 C150 52 150 104 118 104" fill="none" stroke="#FFFDF9" stroke-width="13" stroke-linecap="round"/>
-        <path d="M118 52 C150 52 150 104 118 104" fill="none" stroke="#D9D2CB" stroke-width="2"/>
-        <path d="M22 34 L124 34 L118 136 C117 144 110 148 102 148 L44 148 C36 148 29 144 28 136 Z" fill="#FFFDF9" stroke="#D9D2CB" stroke-width="2.5"/>
-        <ellipse cx="73" cy="34" rx="51" ry="9" fill="#EFEAE5" stroke="#D9D2CB" stroke-width="2.5"/>
-        <g fill="#9FDCF4"><circle cx="38" cy="56" r="2.2"/><circle cx="106" cy="54" r="2.2"/><circle cx="42" cy="96" r="1.8"/><circle cx="108" cy="92" r="1.8"/><circle cx="54" cy="50" r="1.4"/><circle cx="96" cy="70" r="1.4"/></g>
-        <rect x="52" y="78" width="42" height="32" rx="3" fill="#C8102E"/>
-        <rect x="70" y="78" width="6" height="32" fill="#FFD500"/>
-        <rect x="52" y="90" width="42" height="6" fill="#FFD500"/>
-        <path d="M73 78 C60 64 54 76 73 78 C92 76 86 64 73 78 Z" fill="#FFD500" stroke="#E0A800" stroke-width="1"/>
-        <path d="M58 62 q8 -10 15 0 q-8 6 -15 0Z M88 62 q-8 -10 -15 0 q8 6 15 0Z" fill="#1F6B3A"/>
-        <g fill="#C8102E"><circle cx="70" cy="60" r="3"/><circle cx="76" cy="60" r="3"/><circle cx="73" cy="55" r="3"/></g>
-        <text x="73" y="128" text-anchor="middle" font-family="Archivo, Arial, sans-serif" font-weight="900" font-size="9" fill="#E5007D">PRÓXIMAMENTE</text>
-      </svg></div>
-
 <!-- ========== CATÁLOGO (ventana) ========== -->
 <dialog class="catalogo" id="catalogo" aria-labelledby="cat-titulo">
   <div class="cat-cabeza">
@@ -715,9 +720,9 @@
   const CATALOGO = [
     { titulo: "Taza navideña",            tipo: ["tazas", "temporada"], foto: "img/taza-navidad.webp" },
     { titulo: "Taza Virgen de Guadalupe", tipo: ["tazas", "temporada"], foto: "img/taza-virgen-guadalupe.webp" },
-    { titulo: "Virgen de Guadalupe: 12 diseños", tipo: ["tazas", "temporada"], foto: "img/disenos-virgen-guadalupe.webp", grande: true,
+    { titulo: "Virgen de Guadalupe: 12 diseños", tipo: ["tazas", "temporada"], foto: "img/disenos-virgen-guadalupe.webp", grande: true, boton: "Pedir por número",
       mensaje: "¡Hola Todo Gráfico! Quiero la taza de la Virgen de Guadalupe, diseño número: " },
-    { titulo: "Próximamente: regala algo especial esta temporada", tipo: ["temporada"], dibujo: "#dibujo-proximamente",
+    { titulo: "Próximamente: regala algo especial esta temporada", tipo: ["temporada"], dibujo: ".foto-proximamente svg",
       boton: "Avísame", mensaje: "¡Hola Todo Gráfico! Avísenme cuando tengan los nuevos diseños navideños." },
   ];
 </script>
