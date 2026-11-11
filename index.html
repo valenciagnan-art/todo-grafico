@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Todo Gráfico | Tazas personalizadas</title>
-<meta name="description" content="Tazas personalizadas en sublimación. Desde 1 pieza, entrega en 3 días aprox. y pago a la entrega. Pide por WhatsApp.">
+<meta name="description" content="Tazas personalizadas en sublimación. Desde 1 pieza, entrega en 3 días aprox. Pide por WhatsApp.">
 <meta name="theme-color" content="#151515">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -187,6 +187,7 @@
   .producto-info p{color:var(--cafe-suave);font-size:.98rem;flex:1}
   .producto-pie{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px}
   .desde{color:var(--cafe-suave);font-weight:700}
+  .producto-pie:has(> .btn:only-child){justify-content:flex-end}
   .desde b{font-family:"Archivo",sans-serif;font-size:1.5rem;color:var(--terracota)}
   .disenos-gua{margin-top:32px;background:var(--papel);border:1px solid var(--linea);border-radius:var(--radio);padding:24px;text-align:center;box-shadow:var(--sombra)}
   .disenos-gua h3{font-size:clamp(1.4rem,4vw,1.9rem);margin:10px 0 6px}
@@ -425,7 +426,6 @@
       </div>
       <div class="sellos">
         <span>⏱ Entrega <b>3 días</b> aprox.</span>
-        <span>💵 Pagas <b>a la entrega</b></span>
         <span>🚚 Envío <b>con costo adicional</b></span>
         <span>🎨 Diseño de catálogo <b>gratis</b></span>
       </div>
@@ -506,8 +506,7 @@
           <h3>Próximamente</h3>
           <p>Regala algo especial esta temporada. Muy pronto tendremos nuevos diseños navideños.</p>
           <div class="producto-pie">
-            <span class="desde">desde <b>$26</b></span>
-            <a class="btn btn-wa btn-chico wa-link" href="#" data-msg="¡Hola Todo Gráfico! Avísenme cuando tengan los nuevos diseños navideños.">
+                        <a class="btn btn-wa btn-chico wa-link" href="#" data-msg="¡Hola Todo Gráfico! Avísenme cuando tengan los nuevos diseños navideños.">
               <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><use href="#ico-wa"/></svg> Avísame
             </a>
           </div>
@@ -541,7 +540,8 @@
           </div>
         </div>
         <ul class="lista-precios">
-          <li><span>1 a 12 piezas</span><span class="relleno"></span><span class="monto">$40<small>c/u</small></span></li>
+          <li><span>1 a 5 piezas</span><span class="relleno"></span><span class="monto">$70<small>c/u</small></span></li>
+          <li><span>6 a 12 piezas</span><span class="relleno"></span><span class="monto">$40<small>c/u</small></span></li>
           <li><span>13 a 24 piezas</span><span class="relleno"></span><span class="monto">$35<small>c/u</small></span></li>
           <li><span>25 a 35 piezas</span><span class="relleno"></span><span class="monto">$30<small>c/u</small></span></li>
           <li class="destacado"><span>36 o más <span class="chip">Mejor precio</span></span><span class="relleno"></span><span class="monto">$26<small>c/u</small></span></li>
@@ -560,14 +560,14 @@
         <p>Elige uno de nuestros diseños y no pagas nada extra.</p>
       </div>
       <div class="extra">
-        <div class="monto">~$50</div>
+        <div class="monto">$35<small> c/u</small></div>
         <h4>Diseño especial</h4>
-        <p>Un diseño diferente se cobra una sola vez, no por pieza. Puede variar según la dificultad.</p>
+        <p>Cada diseño diferente se cobra una sola vez, no por taza. Puede variar según la dificultad.</p>
       </div>
       <div class="extra">
         <div class="monto">3 días</div>
         <h4>Tiempo de entrega</h4>
-        <p>Aproximadamente. Pago en efectivo al recibir tu pedido.</p>
+        <p>Aproximadamente, según tu pedido.</p>
       </div>
     </div>
 
@@ -618,7 +618,7 @@
         <p>Escoge uno de nuestro catálogo o mándanos tu foto, frase o logo.</p>
       </div>
       <div class="paso">
-        <h3>Recibe y paga</h3>
+        <h3>Recibe</h3>
         <p>En unos 3 días está listo.</p>
       </div>
     </div>
@@ -803,7 +803,7 @@
   }));
 
   // ===== Cotizador (misma lista de precios del menú) =====
-  const precioTaza = n => n <= 12 ? 40 : n <= 24 ? 35 : n <= 35 ? 30 : 26;
+  const precioTaza = n => n <= 5 ? 70 : n <= 12 ? 40 : n <= 24 ? 35 : n <= 35 ? 30 : 26;
   const $ = id => document.getElementById(id);
   const val = id => Math.max(0, parseInt($(id).value, 10) || 0);
   const dinero = n => "$" + n.toLocaleString("es-MX");
@@ -821,7 +821,7 @@
     if (tazas) lineas.push(["Taza 11 oz", tazas, precioTaza(tazas)]);
 
     const disenos = val("c-disenos");
-    if (disenos) lineas.push(["Diseño especial", disenos, 50]);
+    if (disenos) lineas.push(["Diseño especial", disenos, 35]);
 
     const total = lineas.reduce((s, [, n, p]) => s + n * p, 0);
     $("r-lineas").innerHTML = lineas.length
@@ -831,7 +831,7 @@
 
     let tip = "";
     if (tazas && tazas < 36) {
-      const sig = tazas <= 12 ? 13 : tazas <= 24 ? 25 : 36;
+      const sig = tazas <= 5 ? 6 : tazas <= 12 ? 13 : tazas <= 24 ? 25 : 36;
       tip = `Con ${sig} tazas o más, bajan a ${dinero(precioTaza(sig))} c/u.`;
     } else if (tazas >= 36) {
       tip = `¡Ya tienes el mejor precio: $26 por taza!`;
