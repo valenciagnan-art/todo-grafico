@@ -310,12 +310,17 @@
   .contacto-caja p{opacity:.95;max-width:40ch;margin:0 auto 24px;position:relative}
   .contacto-caja .telefono{color:var(--mostaza);font-family:"Archivo",sans-serif;font-size:clamp(1.6rem,5vw,2.2rem);font-weight:800;display:block;margin-bottom:22px;text-decoration:none;position:relative}
   .contacto-caja .btn{position:relative}
-  .ubicacion{background:var(--papel);border-top:1px solid var(--linea);border-bottom:1px solid var(--linea)}
-  .mapa{border-radius:var(--radio);overflow:hidden;border:1px solid var(--linea);box-shadow:var(--sombra);aspect-ratio:16/8;background:var(--crema-2)}
+  .ventana-ubic{height:auto;max-height:min(92vh,760px);width:min(820px,100%)}
+  .ubic-dir{margin-top:8px;color:var(--cafe-suave)}
+  .ubic-dir b{color:var(--cafe)}
+  .contacto-caja .btn-ubic{background:#fff;color:var(--cafe);margin:0 6px 12px}
+  .contacto-caja .btn-ubic:hover{background:var(--crema)}
+  .sello-ubic{display:flex;align-items:center;gap:6px;text-decoration:none;color:var(--cafe-suave)}
+  .sello-ubic b{color:var(--terracota);text-decoration:underline;text-underline-offset:3px}
+  .mapa{border-radius:18px;overflow:hidden;border:1px solid var(--linea);aspect-ratio:16/9;background:var(--crema-2)}
   .mapa iframe{display:block;width:100%;height:100%;border:0}
   .acciones-mapa{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:20px}
-  .nota-envio{text-align:center;color:var(--cafe-suave);font-weight:700;margin-top:16px}
-  @media (max-width:600px){.mapa{aspect-ratio:4/5}.acciones-mapa .btn{flex:1 1 100%}}
+  @media (max-width:600px){.mapa{aspect-ratio:4/5}.acciones-mapa .btn{flex:1 1 100%}.ventana-ubic{height:100%;max-height:100%}}
   .datos-contacto{list-style:none;position:relative;display:grid;gap:8px;max-width:44ch;margin:0 auto 24px;font-weight:700;color:#fff}
   .contacto-caja .btn-wa{background:var(--wa);color:#fff}
   .contacto-caja .btn-wa:hover{background:#1eb957}
@@ -408,7 +413,7 @@
         <li><a href="#precios">Menú y precios</a></li>
         <li><a href="#cotiza">Cotiza</a></li>
         <li><a href="#como">Cómo pedir</a></li>
-        <li><a href="#ubicacion">Ubicación</a></li>
+        <li><a href="#ubicacion" class="abrir-ubicacion">Ubicación</a></li>
         <li><a href="#contacto">Contacto</a></li>
         <li><a class="btn btn-principal btn-chico wa-link" href="#" data-msg="¡Hola Todo Gráfico! Quiero información sobre tazas personalizadas.">Pedir ahora</a></li>
       </ul>
@@ -434,6 +439,7 @@
       <div class="sellos">
         <span>⏱ Entrega <b>3 días</b> aprox.</span>
         <span>🚚 Envío <b>con costo adicional</b></span>
+        <a class="sello-ubic abrir-ubicacion" href="#ubicacion">📍 <b>Ver ubicación</b></a>
         <span>🎨 Diseño de catálogo <b>gratis</b></span>
       </div>
     </div>
@@ -644,27 +650,6 @@
   </div>
 </section>
 
-<!-- ========== UBICACIÓN ========== -->
-<section class="ubicacion" id="ubicacion">
-  <div class="contenedor">
-    <div class="titulo-seccion">
-      <span class="mini">Visítanos</span>
-      <h2>Ubicación</h2>
-      <p>📍 <b>And. 1 1, Benito Juárez, 77537 Cancún, Q.R.</b><br>A espaldas de Telebodega de la López Portillo, de la 98.</p>
-    </div>
-    <div class="mapa">
-      <iframe title="Mapa de la ubicación de Todo Gráfico" src="https://maps.google.com/maps?q=And.+1+1%2C+Benito+Ju%C3%A1rez%2C+77537+Canc%C3%BAn%2C+Q.R.&z=16&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
-    </div>
-    <div class="acciones-mapa">
-      <a class="btn btn-principal" href="https://www.google.com/maps/search/?api=1&query=And.+1+1%2C+Benito+Ju%C3%A1rez%2C+77537+Canc%C3%BAn%2C+Q.R." target="_blank" rel="noopener">📍 Cómo llegar</a>
-      <a class="btn btn-wa wa-link" href="#" data-msg="¡Hola Todo Gráfico! ¿Me pueden mandar su ubicación?">
-        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><use href="#ico-wa"/></svg> Pedir ubicación por WhatsApp
-      </a>
-    </div>
-    <p class="nota-envio">🚚 También contamos con envío, con costo adicional.</p>
-  </div>
-</section>
-
 <!-- ========== CONTACTO ========== -->
 <section id="contacto">
   <div class="contenedor">
@@ -676,6 +661,7 @@
         <li>📍 And. 1 1, Benito Juárez, 77537 Cancún, Q.R. A espaldas de Telebodega de la López Portillo, de la 98.</li>
         <li>🚚 Contamos con envío, con costo adicional.</li>
       </ul>
+      <a class="btn btn-ubic abrir-ubicacion" href="#ubicacion">📍 Ver ubicación</a>
       <a class="btn btn-wa wa-link" href="#" data-msg="¡Hola Todo Gráfico! Me gustaría hacer un pedido.">
         <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><use href="#ico-wa"/></svg>
         Escribir por WhatsApp
@@ -684,6 +670,27 @@
   </div>
 </section>
 </main>
+
+<!-- ========== UBICACIÓN (ventana) ========== -->
+<dialog class="catalogo ventana-ubic" id="ventana-ubicacion" aria-labelledby="ubic-titulo">
+  <div class="cat-cabeza">
+    <div class="cat-fila">
+      <h2 id="ubic-titulo">📍 Ubicación</h2>
+      <button class="cat-cerrar" type="button" aria-label="Cerrar ubicación">×</button>
+    </div>
+    <p class="ubic-dir"><b>And. 1 1, Benito Juárez, 77537 Cancún, Q.R.</b><br>A espaldas de Telebodega de la López Portillo, de la 98.</p>
+  </div>
+  <div class="cat-cuerpo ubic-cuerpo">
+    <div class="mapa"><iframe title="Mapa de la ubicación de Todo Gráfico" data-src="https://maps.google.com/maps?q=And.+1+1%2C+Benito+Ju%C3%A1rez%2C+77537+Canc%C3%BAn%2C+Q.R.&z=16&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
+    <div class="acciones-mapa">
+      <a class="btn btn-principal" href="https://www.google.com/maps/search/?api=1&query=And.+1+1%2C+Benito+Ju%C3%A1rez%2C+77537+Canc%C3%BAn%2C+Q.R." target="_blank" rel="noopener">📍 Cómo llegar</a>
+      <a class="btn btn-wa wa-link" href="#" data-msg="¡Hola Todo Gráfico! ¿Me pueden mandar su ubicación?">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><use href="#ico-wa"/></svg> Pedir ubicación
+      </a>
+    </div>
+  </div>
+  <div class="cat-pie">🚚 También contamos con envío, con costo adicional.</div>
+</dialog>
 
 <!-- ========== CATÁLOGO (ventana) ========== -->
 <dialog class="catalogo" id="catalogo" aria-labelledby="cat-titulo">
@@ -817,6 +824,21 @@
       it.hidden = tipo !== "todos" && !it.dataset.tipo.split(" ").includes(tipo);
     });
   }));
+
+  // ===== Ubicación: ventana =====
+  const dlgU = document.getElementById("ventana-ubicacion");
+  document.querySelectorAll(".abrir-ubicacion").forEach(b => b.addEventListener("click", e => {
+    e.preventDefault();
+    barra.classList.remove("abierto");
+    const f = dlgU.querySelector("iframe");
+    if (!f.src) f.src = f.dataset.src;
+    if (typeof dlgU.showModal === "function") dlgU.showModal(); else dlgU.setAttribute("open", "");
+    document.body.style.overflow = "hidden";
+  }));
+  const cerrarU = () => dlgU.close ? dlgU.close() : dlgU.removeAttribute("open");
+  dlgU.querySelector(".cat-cerrar").addEventListener("click", cerrarU);
+  dlgU.addEventListener("click", e => { if (e.target === dlgU) cerrarU(); });
+  dlgU.addEventListener("close", () => { document.body.style.overflow = ""; });
 
   // ===== Menú en celular =====
   const barra = document.getElementById("barra");
