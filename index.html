@@ -310,6 +310,12 @@
   .contacto-caja p{opacity:.95;max-width:40ch;margin:0 auto 24px;position:relative}
   .contacto-caja .telefono{color:var(--mostaza);font-family:"Archivo",sans-serif;font-size:clamp(1.6rem,5vw,2.2rem);font-weight:800;display:block;margin-bottom:22px;text-decoration:none;position:relative}
   .contacto-caja .btn{position:relative}
+  .ubicacion{background:var(--papel);border-top:1px solid var(--linea);border-bottom:1px solid var(--linea)}
+  .mapa{border-radius:var(--radio);overflow:hidden;border:1px solid var(--linea);box-shadow:var(--sombra);aspect-ratio:16/8;background:var(--crema-2)}
+  .mapa iframe{display:block;width:100%;height:100%;border:0}
+  .acciones-mapa{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:20px}
+  .nota-envio{text-align:center;color:var(--cafe-suave);font-weight:700;margin-top:16px}
+  @media (max-width:600px){.mapa{aspect-ratio:4/5}.acciones-mapa .btn{flex:1 1 100%}}
   .datos-contacto{list-style:none;position:relative;display:grid;gap:8px;max-width:44ch;margin:0 auto 24px;font-weight:700;color:#fff}
   .contacto-caja .btn-wa{background:var(--wa);color:#fff}
   .contacto-caja .btn-wa:hover{background:#1eb957}
@@ -402,6 +408,7 @@
         <li><a href="#precios">Menú y precios</a></li>
         <li><a href="#cotiza">Cotiza</a></li>
         <li><a href="#como">Cómo pedir</a></li>
+        <li><a href="#ubicacion">Ubicación</a></li>
         <li><a href="#contacto">Contacto</a></li>
         <li><a class="btn btn-principal btn-chico wa-link" href="#" data-msg="¡Hola Todo Gráfico! Quiero información sobre tazas personalizadas.">Pedir ahora</a></li>
       </ul>
@@ -634,6 +641,27 @@
       <div class="ventaja"><div class="ico">🚚</div><h4>Envíos</h4><p>Con costo adicional.</p></div>
       <div class="ventaja"><div class="ico">⏱</div><h4>3 días</h4><p>Tiempo de entrega aproximado.</p></div>
     </div>
+  </div>
+</section>
+
+<!-- ========== UBICACIÓN ========== -->
+<section class="ubicacion" id="ubicacion">
+  <div class="contenedor">
+    <div class="titulo-seccion">
+      <span class="mini">Visítanos</span>
+      <h2>Ubicación</h2>
+      <p>📍 Nos ubicamos a espaldas de Telebodega de la López Portillo, de la 98.</p>
+    </div>
+    <div class="mapa">
+      <iframe title="Mapa de la ubicación de Todo Gráfico" src="https://maps.google.com/maps?q=Telebodega+L%C3%B3pez+Portillo+Regi%C3%B3n+98+Canc%C3%BAn+Quintana+Roo&z=16&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+    </div>
+    <div class="acciones-mapa">
+      <a class="btn btn-principal" href="https://www.google.com/maps/search/?api=1&query=Telebodega+L%C3%B3pez+Portillo+Regi%C3%B3n+98+Canc%C3%BAn+Quintana+Roo" target="_blank" rel="noopener">📍 Cómo llegar</a>
+      <a class="btn btn-wa wa-link" href="#" data-msg="¡Hola Todo Gráfico! ¿Me pueden mandar su ubicación?">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><use href="#ico-wa"/></svg> Pedir ubicación por WhatsApp
+      </a>
+    </div>
+    <p class="nota-envio">🚚 También contamos con envío, con costo adicional.</p>
   </div>
 </section>
 
