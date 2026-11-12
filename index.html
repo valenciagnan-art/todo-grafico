@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Todo Gráfico | Tazas personalizadas</title>
-<meta name="description" content="Tazas personalizadas en sublimación. Desde 1 pieza, entrega en 3 días aprox. Pide por WhatsApp.">
+<meta name="description" content="Tazas personalizadas en sublimación. Desde 1 pieza y con tiempos de entrega rápidos. Cotiza en línea.">
 <meta name="theme-color" content="#151515">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -320,7 +320,7 @@
   .mapa{border-radius:18px;overflow:hidden;border:1px solid var(--linea);aspect-ratio:16/9;background:var(--crema-2)}
   .mapa iframe{display:block;width:100%;height:100%;border:0}
   .acciones-mapa{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:20px}
-  @media (max-width:600px){.mapa{aspect-ratio:4/5}.acciones-mapa .btn{flex:1 1 100%}.ventana-ubic{height:100%;max-height:100%}}
+  @media (max-width:600px){.mapa{aspect-ratio:1/1}.acciones-mapa .btn{flex:1 1 100%}.ventana-ubic{height:100%;max-height:100%}}
   .datos-contacto{list-style:none;position:relative;display:grid;gap:8px;max-width:44ch;margin:0 auto 24px;font-weight:700;color:#fff}
   .contacto-caja .btn-wa{background:var(--wa);color:#fff}
   .contacto-caja .btn-wa:hover{background:#1eb957}
@@ -411,11 +411,10 @@
         <li><a href="#catalogo" class="abrir-catalogo">Catálogo</a></li>
         <li><a href="#temporada">Temporada</a></li>
         <li><a href="#precios">Menú y precios</a></li>
-        <li><a href="#cotiza">Cotiza</a></li>
-        <li><a href="#como">Cómo pedir</a></li>
+                <li><a href="#como">Cómo pedir</a></li>
         <li><a href="#ubicacion" class="abrir-ubicacion">Ubicación</a></li>
         <li><a href="#contacto">Contacto</a></li>
-        <li><a class="btn btn-principal btn-chico wa-link" href="#" data-msg="¡Hola Todo Gráfico! Quiero información sobre tazas personalizadas.">Pedir ahora</a></li>
+        <li><a class="btn btn-principal btn-chico" href="#cotiza">Cotiza aquí</a></li>
       </ul>
     </nav>
   </div>
@@ -430,14 +429,14 @@
       <h1>Tazas <em>personalizadas</em></h1>
       <p class="lead">Tu foto, tu frase o tu logo impreso en sublimación, con colores que duran. Ideal para regalos, eventos y negocios.</p>
       <div class="acciones">
-        <a class="btn btn-wa wa-link" href="#" data-msg="¡Hola Todo Gráfico! Quiero cotizar tazas personalizadas.">
-          <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><use href="#ico-wa"/></svg>
-          Cotizar por WhatsApp
+        <a class="btn btn-principal" href="#cotiza">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><path d="M8.5 6.5h7M8.5 11h.01M12 11h.01M15.5 11h.01M8.5 14.5h.01M12 14.5h.01M15.5 14.5h.01M8.5 18h.01M12 18h3.5"/></svg>
+          Cotiza aquí
         </a>
         <a class="btn btn-borde abrir-catalogo" href="#catalogo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg> Ver catálogo</a>
       </div>
       <div class="sellos">
-        <span>⏱ Entrega <b>3 días</b> aprox.</span>
+        <span>⚡ Tiempos de entrega <b>rápidos</b></span>
         <span>🚚 Envío <b>con costo adicional</b></span>
         <a class="sello-ubic abrir-ubicacion" href="#ubicacion">📍 <b>Ver ubicación</b></a>
         <span>🎨 Diseño de catálogo <b>gratis</b></span>
@@ -578,16 +577,16 @@
         <p>Cada diseño diferente se cobra una sola vez, no por taza. Puede variar según la dificultad.</p>
       </div>
       <div class="extra">
-        <div class="monto">3 días</div>
-        <h4>Tiempo de entrega</h4>
-        <p>Aproximadamente, según tu pedido.</p>
+        <div class="monto">Rápido</div>
+        <h4>Tiempos de entrega</h4>
+        <p>Entregamos rápido, según el tamaño de tu pedido.</p>
       </div>
     </div>
 
     <!-- ========== COTIZADOR ========== -->
     <div class="cotizador" id="cotiza">
       <div>
-        <h3>Arma tu pedido</h3>
+        <h3>COTIZA AQUÍ</h3>
         <p>Calcula tu total al momento y mándanos el pedido por WhatsApp.</p>
         <div class="campos">
           <div class="campo">
@@ -632,7 +631,7 @@
       </div>
       <div class="paso">
         <h3>Recibe</h3>
-        <p>En unos 3 días está listo.</p>
+        <p>Tu pedido listo en tiempo récord.</p>
       </div>
     </div>
   </div>
@@ -645,7 +644,7 @@
       <div class="ventaja"><div class="ico">🔥</div><h4>Sublimación</h4><p>Colores vivos que no se cuartean.</p></div>
       <div class="ventaja"><div class="ico">📦</div><h4>Desde 1 pieza</h4><p>Un regalo o un pedido grande.</p></div>
       <div class="ventaja"><div class="ico">🚚</div><h4>Envíos</h4><p>Con costo adicional.</p></div>
-      <div class="ventaja"><div class="ico">⏱</div><h4>3 días</h4><p>Tiempo de entrega aproximado.</p></div>
+      <div class="ventaja"><div class="ico">⚡</div><h4>Entrega rápida</h4><p>Tiempos de entrega rápidos.</p></div>
     </div>
   </div>
 </section>
@@ -684,12 +683,8 @@
     <div class="mapa"><iframe title="Mapa de la ubicación de Todo Gráfico" data-src="https://maps.google.com/maps?q=And.+1+1%2C+Benito+Ju%C3%A1rez%2C+77537+Canc%C3%BAn%2C+Q.R.&z=16&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
     <div class="acciones-mapa">
       <a class="btn btn-principal" href="https://www.google.com/maps/search/?api=1&query=And.+1+1%2C+Benito+Ju%C3%A1rez%2C+77537+Canc%C3%BAn%2C+Q.R." target="_blank" rel="noopener">📍 Cómo llegar</a>
-      <a class="btn btn-wa wa-link" href="#" data-msg="¡Hola Todo Gráfico! ¿Me pueden mandar su ubicación?">
-        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><use href="#ico-wa"/></svg> Pedir ubicación
-      </a>
     </div>
   </div>
-  <div class="cat-pie">🚚 También contamos con envío, con costo adicional.</div>
 </dialog>
 
 <!-- ========== CATÁLOGO (ventana) ========== -->
@@ -712,12 +707,6 @@
 <footer>
   <div class="contenedor"><a href="#inicio" class="logo logo-pie" aria-label="Todo Gráfico, volver arriba"><svg viewBox="0 0 196 86" role="img" aria-label="Todo Gráfico"><use href="#logo-tg"/></svg></a>© <span id="anio"></span> Todo Gráfico · Tazas personalizadas</div>
 </footer>
-
-<!-- Botón flotante de WhatsApp -->
-<a class="wa-flotante wa-link" href="#" data-msg="¡Hola Todo Gráfico! Quiero información sobre tazas personalizadas." aria-label="Escríbenos por WhatsApp">
-  <span class="globo">¿Cotizamos? 👋</span>
-  <svg width="32" height="32" viewBox="0 0 24 24" aria-hidden="true"><use href="#ico-wa"/></svg>
-</a>
 
 <!-- Logo Todo Gráfico -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
